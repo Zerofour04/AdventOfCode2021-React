@@ -1,4 +1,3 @@
-import React from 'react'
 
 let numbers = [
     191,
@@ -2004,7 +2003,7 @@ let numbers = [
 ]
 
 
-function sumNumber() {
+function Day1() {
 
     let currentValue = undefined;
     let previousValue = undefined;
@@ -2023,11 +2022,11 @@ function sumNumber() {
         }
         previousValue = currentValue;
     }
-    console.log('Anzahl increase: ' + numberCount);
+    console.log('Count Increase Part2: ' + numberCount);
 
 }
 
-export default sumNumber;
+export default Day1;
 
 
 
