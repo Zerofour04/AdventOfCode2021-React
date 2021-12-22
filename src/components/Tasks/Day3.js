@@ -1,3 +1,18 @@
+let example = [
+    '00100',
+    '11110',
+    '10110',
+    '10111',
+    '10101',
+    '01111',
+    '00111',
+    '11100',
+    '10000',
+    '11001',
+    '00010',
+    '01010',
+]
+
 let bits = [
     '000001000101',
     '101011100101',
@@ -1001,35 +1016,30 @@ let bits = [
     '001000011001',
 ]
 
-function Day3(){
+function Day3() {
     let zero = 0;
     let one = 0;
     let epsilon = '';
     let gamma = '';
 
+    for (let i = 0; i < 12; i++) {
 
-    for (let i=0; i < 12; i++) {
+        for (let j = 0; j < example.length; j++) {
 
-        for (let j = 0; j < bits.length; j++){
+            const arraySplit2 = example[j].split('')
 
-            const arraySplit2 = bits[j].split('')
-
-            if (arraySplit2[i] ==='0')
-            {zero++}
-            else
-            {one++} 
+            if (arraySplit2[i] === '0') { zero++ }
+            else { one++ }
         }
-  
-        console.log('Result:', i, zero, one)
 
-        if (zero < one){
-            console.log('0');
+        console.log('Result:', zero, one, 'Index:', i)
+
+        if (zero < one) {
             epsilon = epsilon + '0';
             gamma = gamma + '1';
 
-        } 
-        else if (zero > one){
-            console.log('1');
+        }
+        else if (zero > one) {
             epsilon = epsilon + '1';
             gamma = gamma + '0';
         }
@@ -1038,60 +1048,137 @@ function Day3(){
         one = 0;
     }
 
-    console.log(epsilon)
-    console.log(gamma)
+    console.log('Epsilon:', epsilon)
+    console.log('Gamma:', gamma)
 
     let gammaIntDecimal = parseInt(gamma, 2)
     let epsilonIntDecimal = parseInt(epsilon, 2)
 
     console.log('Result:', gammaIntDecimal * epsilonIntDecimal)
-
-    Day3Part2()
 }
 
-function Day3Part2(){
+function Day3Part2Oxygen() {
 
     let zero2 = 0;
     let one2 = 0;
-    let comparison = '';
 
-    for (let i=0; i < 12; i++) {
+    for (let i = 0; i < 5; i++) {
 
-        for (let j = 0; j < bits.length; j++){
+        for (let j = 0; j < example.length; j++) {
 
+            const arraySplit2 = example[j].split('')
 
+            if (arraySplit2[i] === '0') { zero2++ }
 
-            const arraySplit2 = bits[j].split('')
-
-            if (arraySplit2[i] ==='0')
-            {zero2++}
-            
             else
-            {one2++} 
+                if (arraySplit2[i] === '1') { one2++ }
         }
 
-        if (zero2 < one2){
-            console.log('0');
-            comparison = 'zero';
-            const result = bits.filter(function(number){
-                return number < '1';
+
+        if (zero2 > one2) {
+            const filtered = example.filter((number) => {
+
+                if (number[i] === '0') {
+                    return true
+                }
+
+                else if (number[i] === '1') {
+                    return false
+                }
+
             });
-            console.log('Filter', result)
+
+            example = filtered
+            zero2 = 0;
+            one2 = 0;
+        }
+        else if (zero2 <= one2) {
+            const filtered2 = example.filter((number) => {
+
+                if (number[i] === '1') {
+                    return true
+                }
+                else if (number[i] === '0') {
+                    return false
+                }
+
+            });
+
+            example = filtered2
+            zero2 = 0;
+            one2 = 0;
+            console.log('FilteredOxygen:', filtered2)
+
+
+        }
+         if (example.length === 1) {
+            break
         } 
-        else if (zero2 > one2){
-            console.log('1');
-            comparison = 'one';
-            const result2 = bits.filter(function(number){
-                return number > '0';
-            });
-            console.log('Filter2', result2)
-        }
-
-        zero2 = 0;
-        one2 = 0;
     }
 }
 
-export default Day3;
+function Day3PartCO2() {
+    let zero2CO2 = 0;
+    let one2CO2 = 0;
+
+    for (let i = 0; i < 5; i++) {
+
+        for (let j = 0; j < example.length; j++) {
+
+            const arraySplit3 = example[j].split('')
+
+            if (arraySplit3[i] === '0') { zero2CO2++ }
+
+            else
+                if (arraySplit3[i] === '1') { one2CO2++ }
+        }
+
+        console.log(zero2CO2, one2CO2)
+
+        if (one2CO2 >= zero2CO2) {
+            const filtered3 = example.filter((number2) => {
+
+                console.log(number2[i])
+                if (number2[i] === '0') {
+                    return true
+                }
+
+                else if (number2[i] === '1') {
+                    return false
+                }
+
+            });
+
+            example = filtered3
+            zero2CO2 = 0;
+            one2CO2 = 0;
+            console.log('FilteredCO2:', filtered3)
+        }
+        else if (one2CO2 < zero2CO2) {
+            const filtered4 = example.filter((number2) => {
+
+                if (number2[i] === '1') {
+                    return true
+                }
+                else if (number2[i] === '0') {
+                    return false
+                }
+
+            });
+
+            example = filtered4
+            zero2CO2 = 0;
+            one2CO2 = 0;
+
+
+        }
+         if (example.length === 1) {
+            break
+        } 
+    }
+
+}
+
+export { Day3, Day3Part2Oxygen, Day3PartCO2 };
 
 
