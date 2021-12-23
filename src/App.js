@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Day1 from './components/Tasks/Day1';
 import Day2 from './components/Tasks/Day2';
-import {Day3, Day3Part2Oxygen, Day3PartCO2} from './components/Tasks/Day3';
+import {Day3} from './components/Tasks/Day3';
 
 function App() {
   return (
@@ -12,10 +12,11 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <h4 onClick={ Day1 }>Day1</h4>
-        <h4 onClick={ Day2 }>Day2</h4>
-        <h4 onClick={ Day3Part2Oxygen }>Day3</h4>
-        <h4 onClick={ Day3PartCO2 }>Day 3 Part 2</h4>
+        <ul>
+          <li onClick={ Day1 }>Day1</li>
+          <li onClick={ Day2 }>Day2</li>
+          <li onClick={ Day3 }>Day3</li>
+        </ul>
         <a
           className="App-link"
           href="https://reactjs.org"
